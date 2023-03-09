@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormularioComponent } from './Alumnos/formulario/formulario.component';
 import { AlumnoListaService } from './services/alumno-lista.service';
@@ -10,21 +10,26 @@ import {
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Observable, Subscription } from 'rxjs';
 import { Alumnos } from './models/alumnos';
+import { Sesion } from './models/sesion';
+import { SesionService } from './core/services/sesion.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   dataSource!: MatTableDataSource<Alumnos>;
   suscripcion!: Subscription;
+  sesion$!: Observable<Sesion>;
+
   //dialog: any;
   constructor(
     private AlumnoListaService: AlumnoListaService,
     private dialog: MatDialog, // public dialog: MatDialog
 
-    private router: Router
+    private router: Router,
+    private sesion: SesionService
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +41,7 @@ export class AppComponent {
         }
       );
 
+    this.sesion$ = this.sesion.obtenerSesion();
     //this.AlumnoListaService.obtenerAlumnosObservable().subscribe(
     //  (Alumnos: Alumnos[]) => {
     //  this.dataSource.data = Alumnos;
@@ -62,6 +68,8 @@ export class AppComponent {
   };
 
   formulario(alumn: any) {
+    this.router.navigate(['formulario', { mensaje: 'formulario' }]);
+
     this.dataSource.data.push(alumn);
     console.log(alumn);
     const dialogRef = this.dialog.open(FormularioComponent, {
@@ -83,5 +91,16 @@ export class AppComponent {
   irinicio() {
     console.log('inicio');
     this.router.navigate(['inicio', { mensaje: 'inicio' }]);
+  }
+  tabla() {
+    console.log('tabla');
+    this.router.navigate(['tabla']);
+  }
+  salir() {
+    let sesionSalir: Sesion = {
+      sesionActiva: false,
+    };
+    this.sesion.salir(sesionSalir);
+    this.router.navigate(['auth/login']);
   }
 }

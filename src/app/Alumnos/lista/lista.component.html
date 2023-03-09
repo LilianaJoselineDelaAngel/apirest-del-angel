@@ -24,10 +24,15 @@
           </label><br>
           <br>
           <div class="botones">
-            <button mat-raised-button color="primary" (click)="editarAlumno(alumnos)">Editar</button>&nbsp;&nbsp;
-            <button mat-raised-button color="accent" (click)="eliminarAlumno(alumnos)">Eliminar</button>
-            <!--<a href="#" class="btn btn-info" (click)="editar(alumnos)">Editar</a>&nbsp;&nbsp;
+            <ng-container *ngIf="sesion$ | async as sesion">
+              <button mat-raised-button color="primary" (click)="editarAlumno(alumnos)"
+                *ngIf="sesion.usuarioActivo?.esAdmin">Editar</button>&nbsp;&nbsp;
+              <button mat-raised-button color="accent" (click)="eliminarAlumno(alumnos)"
+                *ngIf="sesion.usuarioActivo?.esAdmin">Eliminar</button>
+              <!--<a href="#" class="btn btn-info" (click)="editar(alumnos)">Editar</a>&nbsp;&nbsp;
             <a href="#" class="btn btn-warning" (click)="eliminar(alumnos)">Eliminar</a>-->
+
+            </ng-container>
 
           </div>
 

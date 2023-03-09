@@ -9,46 +9,44 @@ import { FormularioComponent } from './Alumnos/formulario/formulario.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TablaComponent } from './components/tabla/tabla.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTableModule } from '@angular/material/table';
-import { MatIconModule } from '@angular/material/icon';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { AlumnoListaService } from './services/alumno-lista.service';
-import {
-  MatDialogModule,
-  MAT_DIALOG_DEFAULT_OPTIONS,
-} from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { RouterModule } from '@angular/router';
 import { PaginaNoEncontradaComponent } from './components/pagina-no-encontrada/pagina-no-encontrada.component';
-import { AppRoutingModule } from './app-routing.module'; // CLI imports
+import { AppRoutingModule } from './app-routing.module';
+
+//agregar importaciones del modulo
+import { CommonModule } from '@angular/common';
+import { AutenticacionModule } from './autenticacion/autenticacion.module';
+import { AutenticacionRoutingModule } from './autenticacion/autenticacion-routing.module';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListaComponent,
     FormularioComponent,
-    TablaComponent,
+    TablaComponent, //no es necesarioi hacer referencia
     InicioComponent,
-
     PaginaNoEncontradaComponent,
   ],
   imports: [
-    MatIconModule,
-    MatTableModule,
     BrowserModule,
     ReactiveFormsModule, //formularios reactivos
     FormsModule, //formularios de plantillas
     NgbModule,
     BrowserAnimationsModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatToolbarModule,
     RouterModule,
     AppRoutingModule, // CLI adds AppRoutingModule to the AppModule's imports array
+    CommonModule,
+    AutenticacionModule,
+    AutenticacionRoutingModule,
+    ReactiveFormsModule,
+    MaterialModule,
   ],
 
-  exports: [MatTableModule, MatIconModule, MatDialogModule, MatButtonModule],
+  exports: [MaterialModule],
   providers: [
     AlumnoListaService,
     {
