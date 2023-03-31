@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialog } from '@angular/material/dialog';
 
 import { ListaComponent } from './lista.component';
 
@@ -8,9 +9,9 @@ describe('ListaComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ListaComponent ]
-    })
-    .compileComponents();
+      declarations: [ListaComponent],
+      providers: [{ provide: MatDialog }, MatDialog.],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ListaComponent);
     component = fixture.componentInstance;

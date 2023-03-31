@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MatDialog } from '@angular/material/dialog';
 import { TablaComponent } from './tabla.component';
 
 describe('TablaComponent', () => {
@@ -9,6 +9,7 @@ describe('TablaComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TablaComponent],
+      providers: [{ provide: MatDialog, usevalue: {} }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TablaComponent);
