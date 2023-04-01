@@ -79,6 +79,7 @@ export class FormularioComponent {
     this.AlumnoListaService.editar(alumno).subscribe((alumn: Alumnos) => {
       this.Alumnos$ = this.AlumnoListaService.obtenerAlumnosObservable();
       alert(`se actualizo: ${alumno.nombre}`);
+      this.router.navigate(['vistas/tabla']);
       this.router.navigate(['vistas/lista']);
     });
   }
